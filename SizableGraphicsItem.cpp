@@ -42,10 +42,13 @@ void SizableGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent* e)
 	QGraphicsItem::mousePressEvent(e);
 }
 
-void SizableGraphicsItem::positionChanged(QRectF newpos)
+void SizableGraphicsItem::positionChange(QRectF newpos)
 {
 	if (validatePos(newpos))
+	{
 		_pos = newpos;
+		positionChanged();
+	}
 }
 
 void SizableGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* e)
@@ -65,7 +68,7 @@ void SizableGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* e)
 			newpos.setTop(newpos.top() + e->pos().y() - e->lastPos().y());
 		if ((_operation & Bottom))
 			newpos.setBottom(newpos.bottom() + e->pos().y() - e->lastPos().y());
-		positionChanged(newpos);
+		positionChange(newpos);
 	}
 	QGraphicsItem::mouseMoveEvent(e);
 }

@@ -38,13 +38,14 @@ public:
 	QRectF boundingRect() const;
 protected:
 	virtual bool validatePos(QRectF newpos);
+	virtual void positionChanged() {}
 
 	void mousePressEvent(QGraphicsSceneMouseEvent* e);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* e);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* e);
 	void hoverMoveEvent(QGraphicsSceneHoverEvent *e);
 private:
-	void positionChanged(QRectF newpos);
+	void positionChange(QRectF newpos);
 
 	operation_t operationPosition(QPointF pos);
 	QCursor operationCursor(operation_t resize);
