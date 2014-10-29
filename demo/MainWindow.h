@@ -16,6 +16,8 @@
 
 class MainGraphicsItem;
 
+class MainScene;
+
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -29,10 +31,20 @@ private:
 	MainGraphicsItem *_item, *_item2;
 };
 
+class MainView : public QGraphicsView
+{
+public:
+	MainView(QWidget *parent = 0);
+protected:
+	void contextMenuEvent(QContextMenuEvent *event);
+};
+
+
 class MainGraphicsItem : public SizableGraphicsItem
 {
 public:
 	MainGraphicsItem(QRectF pos, QGraphicsItem *parent = 0);
+	~MainGraphicsItem();
 
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 protected:

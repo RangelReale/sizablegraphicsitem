@@ -1,12 +1,18 @@
 #include "MainWindow.h"
 
+#include <QMenu>
+#include <QAction>
+#include <QGraphicsSceneContextMenuEvent>
+#include <QContextMenuEvent>
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent)
 {
 	resize(1280, 800);
 	setWindowTitle("SizableGraphicsItem Test");
 
-	_widget = new QGraphicsView(this);
+	_widget = new MainView(this);
 	_scene = new QGraphicsScene(this);
 	_widget->setScene(_scene);
 
@@ -24,7 +30,36 @@ MainWindow::MainWindow(QWidget *parent) :
 	setCentralWidget(_widget);
 }
 
+MainView::MainView(QWidget *parent) : QGraphicsView(parent)
+{
+
+}
+
+void MainView::contextMenuEvent(QContextMenuEvent *event)
+{
+	//QGraphicsScene::contextMenuEvent(event);
+	QGraphicsItem *item = scene()->itemAt(event->pos(), QTransform());
+	if (item)
+	{
+		QMenu menu;
+		QAction *removeAction = menu.addAction("Remove");
+		QAction *selectedAction = menu.exec(event->globalPos());
+
+		if (selectedAction == removeAction)
+			delete item;
+	}
+	else
+	{
+		QGraphicsView::contextMenuEvent(event);
+	}
+}
+
 MainGraphicsItem::MainGraphicsItem(QRectF pos, QGraphicsItem *parent) : SizableGraphicsItem(pos, parent)
+{
+
+}
+
+MainGraphicsItem::~MainGraphicsItem()
 {
 
 }
@@ -32,6 +67,8 @@ MainGraphicsItem::MainGraphicsItem(QRectF pos, QGraphicsItem *parent) : SizableG
 void MainGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	QPen pen(Qt::yellow);
+	if (hasFocus())
+		pen = QPen(Qt::blue);
 	painter->setPen(pen);
 
 	QBrush brush(Qt::red);

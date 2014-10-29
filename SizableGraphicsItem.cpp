@@ -7,6 +7,7 @@ SizableGraphicsItem::SizableGraphicsItem(QRectF pos, QGraphicsItem *parent) :
 	QGraphicsItem(parent), _pos(pos), _operation(0), _allowmove(true), _allowresize(true)
 {
 	setFlag(QGraphicsItem::ItemIsSelectable);
+	setFlag(QGraphicsItem::ItemIsFocusable);
 	setAcceptHoverEvents(true);
 }
 
