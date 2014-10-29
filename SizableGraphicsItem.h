@@ -36,6 +36,8 @@ public:
 	void setAllowResize(bool value) { _allowresize = value; }
 
 	QRectF boundingRect() const;
+
+	void raise();
 protected:
 	virtual bool validatePos(QRectF newpos);
 	virtual void positionChanged() {}

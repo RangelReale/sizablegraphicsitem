@@ -11,6 +11,11 @@ SizableGraphicsItem::SizableGraphicsItem(QRectF pos, QGraphicsItem *parent) :
 	setAcceptHoverEvents(true);
 }
 
+void SizableGraphicsItem::raise()
+{
+	static int zvaluect = 1;
+	setZValue(zvaluect++);
+}
 
 QRectF SizableGraphicsItem::boundingRect() const
 {
@@ -34,9 +39,7 @@ void SizableGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent* e)
 	if (e->buttons() == Qt::LeftButton)
 	{
 		//qDebug() << "mousePressEvent: " << e->pos();
-		static int zvaluect = 1;
-		setZValue(zvaluect++);
-
+		raise();
 		_operation = operationPosition(e->pos());
 	}
 	QGraphicsItem::mousePressEvent(e);
