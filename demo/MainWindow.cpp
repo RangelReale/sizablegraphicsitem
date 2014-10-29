@@ -38,7 +38,7 @@ MainView::MainView(QWidget *parent) : QGraphicsView(parent)
 void MainView::contextMenuEvent(QContextMenuEvent *event)
 {
 	//QGraphicsScene::contextMenuEvent(event);
-	QGraphicsItem *item = scene()->itemAt(event->pos(), QTransform());
+	QGraphicsItem *item = scene()->itemAt(mapToScene(event->pos()), QTransform());
 	if (item)
 	{
 		QMenu menu;
