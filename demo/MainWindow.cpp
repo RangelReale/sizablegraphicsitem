@@ -31,9 +31,14 @@ MainGraphicsItem::MainGraphicsItem(QRectF pos, QGraphicsItem *parent) : SizableG
 
 void MainGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+	QPen pen(Qt::yellow);
+	painter->setPen(pen);
+
 	QBrush brush(Qt::red);
 	brush.setStyle(Qt::SolidPattern);
-	painter->fillRect(boundingRect(), brush);
+	painter->setBrush(brush);
+
+	painter->drawRect(boundingRect());
 
 	QRectF r(mapRectToScene(pos()));
 	r.setTopLeft(QPointF(r.left() + 10, r.top() + 10));

@@ -33,6 +33,9 @@ void SizableGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent* e)
 	if (e->buttons() == Qt::LeftButton)
 	{
 		//qDebug() << "mousePressEvent: " << e->pos();
+		static int zvaluect = 1;
+		setZValue(zvaluect++);
+
 		_operation = operationPosition(e->pos());
 	}
 	QGraphicsItem::mousePressEvent(e);
